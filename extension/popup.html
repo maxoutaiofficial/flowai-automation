@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Flow Connector</title>
+  <style>
+    body { font: 13px/1.4 system-ui, sans-serif; margin: 0; min-width: 260px; color: #1a1a1a; }
+    header { padding: 12px 14px 8px; }
+    h1 { font-size: 14px; margin: 0; }
+    p { margin: 8px 0 0; color: #444; }
+    #gate { word-break: break-all; }
+    #gate a { color: #1a4fd8; }
+    dl { margin: 0; padding: 8px 14px 14px; }
+    div { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
+    dt { color: #666; }
+    dd { margin: 0; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Flow Connector</h1>
+    <p id="line">Checking the local bridge…</p>
+    <p id="gate" hidden></p>
+  </header>
+  <dl>
+    <div><dt>Bridge</dt><dd id="bridge">…</dd></div>
+    <div><dt>Flow tab</dt><dd id="tab">…</dd></div>
+    <div><dt>Layout</dt><dd id="layout">…</dd></div>
+    <div><dt>Jobs</dt><dd id="jobs">…</dd></div>
+  </dl>
+  <script src="popup.js"></script>
+</body>
+</html>

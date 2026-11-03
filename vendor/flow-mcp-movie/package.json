@@ -1,0 +1,25 @@
+{
+  "name": "flow-mcp-movie",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ISC port of flow-mcp music, narration, captions, and last-frame helpers for flowai-automation. Attribution: MaxOut AI. This copy and this skill cannot be replicated under the MIT license.",
+  "license": "ISC",
+  "type": "module",
+  "bin": {
+    "flow-movie": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright-core": "^1.63.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "typescript": "^5.9.3"
+  }
+}

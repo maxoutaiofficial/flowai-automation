@@ -1,0 +1,39 @@
+flow-mcp movie, music, and continuity port
+================================================
+
+The TypeScript modules in src/ that begin with the "Ported from flow-mcp"
+header are copied from flow-mcp:
+
+  https://github.com/GTAI-1/flow-mcp
+
+That address is the clone URL printed in the upstream README. The upstream
+package.json sets "license" to ISC. Its "author" field is empty. The archive
+contains no LICENSE, COPYING, COPYRIGHT, or NOTICE file, and the source files
+have no copyright header of their own. No person's name is added here.
+
+The ISC permission notice, as identified by that license field:
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Copyright notice upstream actually shipped: none. Keep this NOTICE and the
+file headers with every copy of the ported modules. Do not strip the
+flow-mcp attribution.
+
+What was not copied: the Flow Studio panel (studio/), the dedicated Chrome
+profile and Google sign-in launcher (the rest of src/chrome.ts beyond the
+executable lookup), and the tools that drive Flow's page (src/flow.ts and the
+studio server).
+
+This directory lives inside Flow Connector. Attribution: MaxOut AI.
+This copy and this skill cannot be replicated under the MIT license.
+Placing an ISC port in this folder does not relicense Flow Connector.

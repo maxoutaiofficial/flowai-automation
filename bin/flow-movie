@@ -1,0 +1,21 @@
+#!/bin/sh
+# Local entry for flow-movie, next to flow-auto. The CLI is the ISC port in
+# vendor/flow-mcp-movie. See that folder's NOTICE. This script does not publish
+# anything and does not open Google Flow.
+set -eu
+SOURCE=$0
+while [ -L "$SOURCE" ]; do
+  DIR=$(CDPATH= cd -- "$(dirname "$SOURCE")" && pwd)
+  LINK=$(readlink "$SOURCE")
+  case $LINK in
+    /*) SOURCE=$LINK ;;
+    *) SOURCE=$DIR/$LINK ;;
+  esac
+done
+ROOT=$(CDPATH= cd -- "$(dirname "$SOURCE")/.." && pwd)
+CLI=$ROOT/vendor/flow-mcp-movie/dist/cli.js
+if [ ! -f "$CLI" ]; then
+  echo "flow-movie is not built. In $ROOT/vendor/flow-mcp-movie run: npm install && npm run build" >&2
+  exit 1
+fi
+exec node "$CLI" "$@"
