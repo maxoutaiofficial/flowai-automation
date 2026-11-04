@@ -2,6 +2,8 @@
 
 **Attribution: MaxOut AI**
 
+Copyright (c) 2026 MaxOut AI
+
 ## License
 
 Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms.
