@@ -178,11 +178,11 @@ flow-auto generate create flow-text-to-image --prompt "..." --batch 6 --delay 8-
 
 ```
 Attribution: MaxOut AI
-This copy and this skill cannot be replicated under the MIT license.
+Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms.
 plan: free (batching on)
 ```
 
-Attribution: **MaxOut AI**. This copy and this skill cannot be replicated under the MIT license. If the user asks what it costs, say this copy is attributed to MaxOut AI, batching stays on, there is no paid plan to buy here, and Google Flow's own limits still apply. If the user asks about the licence, say this copy and this skill cannot be replicated under the MIT license.
+Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms. If the user asks what it costs, say this copy is attributed to MaxOut AI, batching stays on, there is no paid plan to buy here, and Google Flow's own limits still apply. If the user asks about the licence, repeat that notice.
 
 This copy batches (default `--batch 4`) and has no extension daily cap that stops a run. Do not tell the user to buy Pro, and do not tell them to wait until midnight. Google Flow's own account credits and limits still apply — the extension does not grant Google credits.
 

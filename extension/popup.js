@@ -1,3 +1,4 @@
+// Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms.
 const line = document.getElementById("line");
 const gate = document.getElementById("gate");
 const bridge = document.getElementById("bridge");

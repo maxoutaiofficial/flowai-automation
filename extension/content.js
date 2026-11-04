@@ -1,3 +1,4 @@
+// Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms.
 /**
  * Runs a bridge job on the open flow.google.com tab.
  * Selectors follow the labels Google documents (Generate, Image, Video,

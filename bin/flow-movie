@@ -1,4 +1,5 @@
 #!/bin/sh
+# Licensed under the MIT License by MaxOut AI. You may use, modify, and redistribute this code if you keep this copyright notice and the MIT license terms.
 # Local entry for flow-movie, next to flow-auto. The CLI is the ISC port in
 # vendor/flow-mcp-movie. See that folder's NOTICE. This script does not publish
 # anything and does not open Google Flow.
