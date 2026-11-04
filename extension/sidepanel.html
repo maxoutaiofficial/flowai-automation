@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Flow Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MaxOut AI</title>
   <style>
     :root {
       color-scheme: dark;
@@ -27,6 +28,29 @@
       font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
+    header.brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    header.brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+    }
+    header.brand strong {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    header.brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
     nav {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -40,9 +64,17 @@
       background: transparent;
       color: var(--muted);
       padding: 15px 8px 13px;
-      font: 600 14px/1 inherit;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
       letter-spacing: 0.01em;
       cursor: pointer;
+    }
+    nav button:hover { color: var(--text); }
+    nav button:focus-visible {
+      outline: 2px solid #9fd9ff;
+      outline-offset: -2px;
     }
     nav button.active { color: #fff; }
     nav button.active::after {
@@ -98,7 +130,10 @@
       border: 0;
       border-radius: 14px;
       padding: 14px 18px;
-      font: 700 15px/1.2 inherit;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
       color: #fff;
       cursor: pointer;
       background: var(--grad);
@@ -106,6 +141,16 @@
     }
     button.primary:hover { filter: brightness(1.06); }
     button.primary:active { transform: translateY(1px); }
+    .footer {
+      margin: 18px 0 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footer a { color: #8eb4ff; }
+    @media (prefers-reduced-motion: reduce) {
+      button.primary:active { transform: none; }
+    }
     button.primary:focus-visible {
       outline: 2px solid #9fd9ff;
       outline-offset: 2px;
@@ -136,13 +181,20 @@
   </style>
 </head>
 <body>
-  <nav aria-label="Flow Connect">
-    <button type="button" role="tab" data-tab="home" aria-controls="panel-home" aria-selected="false">Home</button>
-    <button type="button" role="tab" data-tab="setup" class="active" aria-controls="panel-setup" aria-selected="true">Setup</button>
-    <button type="button" role="tab" data-tab="help" aria-controls="panel-help" aria-selected="false">Help</button>
+  <header class="brand">
+    <img src="icons/icon48.png" alt="" width="28" height="28">
+    <div>
+      <strong>MaxOut AI</strong>
+      <span>Flow Connector for Google Flow</span>
+    </div>
+  </header>
+  <nav role="tablist" aria-label="MaxOut AI">
+    <button type="button" role="tab" id="tab-home" data-tab="home" aria-controls="panel-home" aria-selected="false">Home</button>
+    <button type="button" role="tab" id="tab-setup" data-tab="setup" class="active" aria-controls="panel-setup" aria-selected="true">Setup</button>
+    <button type="button" role="tab" id="tab-help" data-tab="help" aria-controls="panel-help" aria-selected="false">Help</button>
   </nav>
   <main>
-    <section id="panel-setup" role="tabpanel">
+    <section id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
       <h1>Setup</h1>
       <div class="card">
         <h2 id="features-heading">Features</h2>
@@ -156,11 +208,12 @@
         </ul>
       </div>
       <button type="button" class="primary" id="copy">Copy prompt</button>
+      <p class="footer">Paste it into your coding agent. Source and releases on <a href="https://github.com/maxoutaiofficial/flowai-automation" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
     </section>
-    <section id="panel-home" role="tabpanel" hidden>
+    <section id="panel-home" role="tabpanel" aria-labelledby="tab-home" hidden>
       <h1>Home</h1>
       <div class="card">
-        <p id="line">Checking the local bridge…</p>
+        <p id="line" aria-live="polite">Checking the local bridge…</p>
         <p id="gate" hidden></p>
         <dl>
           <div><dt>Bridge</dt><dd id="bridge">…</dd></div>
@@ -170,7 +223,7 @@
         </dl>
       </div>
     </section>
-    <section id="panel-help" role="tabpanel" hidden>
+    <section id="panel-help" role="tabpanel" aria-labelledby="tab-help" hidden>
       <h1>Help</h1>
       <div class="card">
         <ol>
