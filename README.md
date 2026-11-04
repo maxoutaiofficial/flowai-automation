@@ -6,6 +6,18 @@
 
 **This copy and this skill cannot be replicated under the MIT license.**
 
+## Our Chrome extension
+
+> [!IMPORTANT]
+> This is our Chrome extension. Download it, enable Developer mode in Chrome, and load it unpacked from the `extension/` directory.
+>
+> 1. Download this repo.
+> 2. Open `chrome://extensions`.
+> 3. Turn on Developer mode.
+> 4. Click **Load unpacked** and choose the `extension/` folder.
+> 5. Open <https://flow.google.com> and keep that tab visible.
+> 6. Start the CLI so the bridge listens on `127.0.0.1:8791`.
+
 **Connect your coding agent to [Google Flow](https://flow.google.com)**
 Ask it to create images and videos the same way you ask it to write code.
 
@@ -101,7 +113,7 @@ Flow Connector supports Flow's available generation modes, including:
 
 The available models depend on what Google Flow makes available to your account.
 
-Joining finished clips, a music bed (its own volume, separate from the clips' sound), narration, burned-in captions plus an `.srt`, and continuing a shot from a clip's last frame are local commands. They were ported from [flow-mcp](https://github.com/GTAI-1/flow-mcp) under the ISC license declared in that project's `package.json`; the notice stays in [`vendor/flow-mcp-movie`](vendor/flow-mcp-movie). They do not drive the Flow tab. The next shot still goes through `flow-auto` and the extension, and only if you pass `--run`. The extension source is not in this repo.
+Joining finished clips, a music bed (its own volume, separate from the clips' sound), narration, burned-in captions plus an `.srt`, and continuing a shot from a clip's last frame are local commands. They were ported from [flow-mcp](https://github.com/GTAI-1/flow-mcp) under the ISC license declared in that project's `package.json`; the notice stays in [`vendor/flow-mcp-movie`](vendor/flow-mcp-movie). They do not drive the Flow tab. The next shot still goes through `flow-auto` and the extension, and only if you pass `--run`. The extension source is in [`extension/`](extension/).
 
 ## Film commands
 
@@ -171,11 +183,9 @@ This copy does not ask you to sign in to a paid plan. Full policy:
 
 ## Install
 
-From the Chrome Web Store — the listing is in review. This repo is the support
-channel and the home of the [agent skill](skills/flow-generate/SKILL.md) and the
-docs; the extension itself ships through the store.
+Download this repo and load the Chrome extension unpacked from [`extension/`](extension/). The steps are at the top of this page. This repo is the support channel and the home of the [agent skill](skills/flow-generate/SKILL.md) and the docs.
 
-To load the unpacked extension in this checkout, see [extension/EXTENSION.md](extension/EXTENSION.md).
+More detail is in [extension/EXTENSION.md](extension/EXTENSION.md).
 
 ## Something broken?
 
@@ -187,7 +197,7 @@ it is usually enough to find the problem.
 
 ## Press kit
 
-Everything on this page, at full resolution, is in the store listing. The
+The images on this page are in [`assets/`](assets/). The
 extension's own mark:
 
 <img src="assets/icon.png" width="96" alt="Flow Connector icon">
