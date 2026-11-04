@@ -35,7 +35,7 @@ Joining a film, a music bed, narration, captions, and taking the last frame for 
 1. Run `flow-auto status --site flow`. The bridge daemon auto-starts on first use.
    - First time in a session it reports `extension (flow): connected` — say so once, don't repeat it later.
    - `flow-auto: command not found` means the CLI is not installed on this
-     machine. Install it and nothing else: `npm install -g flow-connector-cli`
+     machine. Install it and nothing else: `npm install -g https://github.com/maxoutaiofficial/flowai-automation/releases/download/v1.0.13/flow-connector-cli-1.0.13.tgz`
      (needs Node.js 20+; if `npm` is missing too, the user installs Node from
      https://nodejs.org and opens a NEW terminal). Then re-run the check.
 2. If it prints `NOT CONNECTED`, or anything at all looks wrong later, run:

@@ -4,7 +4,7 @@
   "version": "1.2.4",
   "description": "Drives the open Google Flow tab from the local Flow Connector bridge.",
   "minimum_chrome_version": "116",
-  "permissions": ["tabs", "downloads", "storage", "alarms", "scripting"],
+  "permissions": ["tabs", "downloads", "storage", "alarms", "scripting", "sidePanel"],
   "host_permissions": [
     "http://127.0.0.1:8791/*",
     "ws://127.0.0.1:8791/*",
@@ -16,8 +16,10 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Flow Connector",
-    "default_popup": "popup.html"
+    "default_title": "Flow Connector"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {

@@ -1191,6 +1191,34 @@ function boot(reason) {
   }, 20000);
 }
 
-chrome.runtime.onInstalled.addListener(() => boot("installed"));
+function enableSidePanel() {
+  if (!chrome.sidePanel) return;
+  const path = "sidepanel.html";
+  if (chrome.sidePanel.setOptions) {
+    Promise.resolve(chrome.sidePanel.setOptions({ path, enabled: true })).catch((err) => {
+      log("warn", "panel", err instanceof Error ? err.message : String(err));
+    });
+  }
+  if (chrome.sidePanel.setPanelBehavior) {
+    Promise.resolve(chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })).catch((err) => {
+      log("warn", "panel", err instanceof Error ? err.message : String(err));
+    });
+  }
+}
+
+chrome.action.onClicked.addListener((tab) => {
+  if (!chrome.sidePanel?.open) return;
+  const windowId = tab?.windowId;
+  if (windowId == null) return;
+  Promise.resolve(chrome.sidePanel.open({ windowId })).catch((err) => {
+    log("warn", "panel", err instanceof Error ? err.message : String(err));
+  });
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  enableSidePanel();
+  boot("installed");
+});
 chrome.runtime.onStartup.addListener(() => boot("startup"));
+enableSidePanel();
 boot("worker");

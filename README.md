@@ -33,7 +33,7 @@ flowai-automation (Flow Connector): the CLI talks to a local bridge, and the Chr
 ## CLI
 
 ```bash
-npm install -g flow-connector-cli
+npm install -g https://github.com/maxoutaiofficial/flowai-automation/releases/download/v1.0.13/flow-connector-cli-1.0.13.tgz
 flow-auto bridge start
 flow-auto status --site flow
 ```

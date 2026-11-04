@@ -16,7 +16,7 @@ Unpacked Manifest V3 extension. It drives the open `https://flow.google.com` tab
 5. Start the bridge with the Flow Connector CLI (`flow-auto`). It listens on `127.0.0.1:8791`.
 6. Reload the Flow tab once after the first load so the content script is on the page. The service worker also injects it if the tab is already open.
 
-The toolbar popup shows whether the socket is up and whether the Flow tab is visible.
+Clicking the toolbar icon opens this page in the Chrome side panel. The first screen is Setup, with the agent prompt to copy. Status is the second tab and shows whether the socket is up and whether the Flow tab is visible.
 
 ## How it connects
 
