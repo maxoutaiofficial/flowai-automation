@@ -70,18 +70,20 @@
     }
     h1, h2 { margin: 0; font-size: 18px; }
     .lead { margin: 0; color: var(--muted); }
-    textarea {
+    pre#setup-prompt {
       flex: 1;
       min-height: 280px;
       width: 100%;
-      resize: none;
+      margin: 0;
+      overflow: auto;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #101218;
       color: #e8eaf0;
       padding: 12px;
       font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      white-space: pre;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
     .row { display: flex; align-items: center; gap: 10px; }
     button.primary {
@@ -127,7 +129,7 @@
     <section id="panel-setup">
       <h1>Setup</h1>
       <p class="lead">Copy this prompt into your coding agent. It installs Flow Connector from the MaxOut release.</p>
-      <textarea id="setup-prompt" readonly spellcheck="false">Set up Flow Connector on my machine so you can generate images and videos through my own logged-in Google Flow session (no API cost).
+      <pre id="setup-prompt">Set up Flow Connector on my machine so you can generate images and videos through my own logged-in Google Flow session (no API cost).
 
 This is safe to run even if it's already set up — check each step first and skip
 anything already done. Never force or reinstall something that's already working.
@@ -183,7 +185,7 @@ the sandbox talking, not a missing or broken install.
        curl -fsSL https://nodejs.org/dist/index.json
        # pick the newest entry whose "lts" is not false, note its "version"
        # (e.g. v22.11.0), then, with ARCH = arm64 on Apple Silicon, x64 on Intel:
-       curl -fsSL -o /tmp/node-lts.pkg https://nodejs.org/dist/<version>/node-<version>.pkg
+       curl -fsSL -o /tmp/node-lts.pkg https://nodejs.org/dist/&lt;version&gt;/node-&lt;version&gt;.pkg
        sudo installer -pkg /tmp/node-lts.pkg -target /
    The `sudo` will ask for my password — tell me it is coming and wait.
    Then open a new terminal tab.
@@ -290,7 +292,7 @@ If a step fails, stop and tell me in plain words what went wrong and what I
 need to do — show the raw error underneath that, not instead of it.
 
 When it all works, say so in one line and start using it. Do not read the
-whole setup back to me.</textarea>
+whole setup back to me.</pre>
       <div class="row">
         <button type="button" class="primary" id="copy">Copy prompt</button>
         <p id="copied" hidden>Copied.</p>

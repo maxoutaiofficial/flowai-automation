@@ -8,6 +8,14 @@
  * one HTTP call this side makes to the bridge: GET /files/<token>.
  */
 
+try {
+  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((err) => {
+    console.error("sidePanel.setPanelBehavior failed", err);
+  });
+} catch (err) {
+  console.error("sidePanel.setPanelBehavior failed", err);
+}
+
 const BRIDGE_WS = "ws://127.0.0.1:8791/ws";
 const FILE_BASE = "http://127.0.0.1:8791/files/";
 const EXT_VERSION = "1.2.4";
@@ -1192,27 +1200,52 @@ function boot(reason) {
 }
 
 function enableSidePanel() {
-  if (!chrome.sidePanel) return;
-  const path = "sidepanel.html";
-  if (chrome.sidePanel.setOptions) {
-    Promise.resolve(chrome.sidePanel.setOptions({ path, enabled: true })).catch((err) => {
-      log("warn", "panel", err instanceof Error ? err.message : String(err));
+  try {
+    if (!chrome.sidePanel || typeof chrome.sidePanel.setPanelBehavior !== "function") {
+      console.error("sidePanel.setPanelBehavior is missing");
+      return;
+    }
+    chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((err) => {
+      console.error("sidePanel.setPanelBehavior failed", err);
     });
+    if (typeof chrome.sidePanel.setOptions === "function") {
+      chrome.sidePanel.setOptions({ path: "sidepanel.html", enabled: true }).catch((err) => {
+        console.error("sidePanel.setOptions failed", err);
+      });
+    }
+  } catch (err) {
+    console.error("sidePanel.setPanelBehavior failed", err);
   }
-  if (chrome.sidePanel.setPanelBehavior) {
-    Promise.resolve(chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })).catch((err) => {
-      log("warn", "panel", err instanceof Error ? err.message : String(err));
+}
+
+function openSidePanel(windowId) {
+  if (typeof windowId !== "number") {
+    console.error("sidePanel.open failed", "missing windowId");
+    return;
+  }
+  try {
+    chrome.sidePanel.open({ windowId }).catch((err) => {
+      console.error("sidePanel.open failed", err);
     });
+  } catch (err) {
+    console.error("sidePanel.open failed", err);
   }
 }
 
 chrome.action.onClicked.addListener((tab) => {
-  if (!chrome.sidePanel?.open) return;
-  const windowId = tab?.windowId;
-  if (windowId == null) return;
-  Promise.resolve(chrome.sidePanel.open({ windowId })).catch((err) => {
-    log("warn", "panel", err instanceof Error ? err.message : String(err));
-  });
+  try {
+    if (typeof tab?.windowId === "number") {
+      openSidePanel(tab.windowId);
+      return;
+    }
+    chrome.windows.getCurrent().then((win) => {
+      openSidePanel(win && win.id);
+    }).catch((err) => {
+      console.error("sidePanel.open failed", err);
+    });
+  } catch (err) {
+    console.error("sidePanel.open failed", err);
+  }
 });
 
 chrome.runtime.onInstalled.addListener(() => {
