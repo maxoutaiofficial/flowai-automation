@@ -39,7 +39,7 @@ Input files are the HTTP part. On `job.submit`, each `inputFiles[].token` (and a
 
 `job.accepted`, `job.progress`, `job.result`, and `job.failed` go back on the same socket. Progress stages are `acquiring-tab`, `preparing-page`, `applying-mode`, `applying-settings`, `attaching-images`, `entering-prompt`, `submitting`, `generating`, `collecting-results`, and `downloading`. A result file is `{ path, kind }` with `kind` of `image` or `video`. `path` is relative to Downloads, shaped like `flow-auto/1 - <label>.png` (the `--folder` value is used when the job sends one). `job.cancel`, `queue.stop`, `queue.clear`, and `ext.reload` are handled. `status.query`, `healthcheck.run`, `logs.query`, and `dom.query` are answered too.
 
-The reported extension version is `1.2.4` because the bridge refuses more than three ingredients unless the connected extension is at least that version. This build passes every supplied file through to the page.
+The reported extension version is `1.3.4` because the bridge refuses more than three ingredients unless the connected extension is at least that version. This build passes every supplied file through to the page.
 
 ## Subscription gate
 
