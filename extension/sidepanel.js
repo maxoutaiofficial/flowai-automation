@@ -10,9 +10,23 @@ function showTab(name) {
     if (tabButton) {
       tabButton.classList.toggle("active", on);
       tabButton.setAttribute("aria-selected", on ? "true" : "false");
+      tabButton.tabIndex = on ? 0 : -1;
     }
   }
+  if (name === "home") refreshStatus();
 }
+
+const TAB_ORDER = ["home", "setup", "help"];
+document.querySelector('[role="tablist"]')?.addEventListener("keydown", (event) => {
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  const current = document.activeElement?.getAttribute("data-tab");
+  const index = TAB_ORDER.indexOf(current);
+  if (index < 0) return;
+  event.preventDefault();
+  const next = TAB_ORDER[(index + (event.key === "ArrowRight" ? 1 : TAB_ORDER.length - 1)) % TAB_ORDER.length];
+  showTab(next);
+  document.querySelector('[data-tab="' + next + '"]')?.focus();
+});
 
 document.querySelectorAll("[data-tab]").forEach((button) => {
   button.addEventListener("click", () => showTab(button.getAttribute("data-tab") || "setup"));
@@ -108,7 +122,7 @@ function refreshStatus() {
       if (line) {
         line.textContent = status.connected
           ? "Talking to the bridge on this computer."
-          : status.lastError || "Start the Flow Connector CLI so the bridge is listening.";
+          : status.lastError || "Start the MaxOut AI Flow Connector CLI so the bridge is listening.";
       }
       fillPage(status);
     });
@@ -119,3 +133,7 @@ function refreshStatus() {
 
 refreshStatus();
 showTab("setup");
+setInterval(() => {
+  const home = document.getElementById("panel-home");
+  if (home && !home.hidden && !document.hidden) refreshStatus();
+}, 3000);

@@ -18,7 +18,7 @@ try {
 
 const BRIDGE_WS = "ws://127.0.0.1:8791/ws";
 const FILE_BASE = "http://127.0.0.1:8791/files/";
-const EXT_VERSION = "1.2.4";
+const EXT_VERSION = "1.3.4";
 const CHANNEL_ID = "UCf81rjZnBT9mo_PCXds62BQ";
 const CHANNEL_URL = "https://www.youtube.com/channel/UCf81rjZnBT9mo_PCXds62BQ";
 const SESSION_GATE_KEY = "ytSubGate";

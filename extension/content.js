@@ -196,8 +196,35 @@ function labelOf(el) {
     const text = labelled.split(/\s+/).map((id) => document.getElementById(id)?.innerText || "").join(" ");
     if (norm(text)) return norm(text);
   }
-  const text = norm(el.innerText || el.textContent || "");
+  const text = textWithoutIcons(el);
   return text.length > 80 ? "" : text;
+}
+
+// Flow's buttons now carry Material icon ligatures ("image Images"). Drop the
+// icon glyph text so labels read "Images", not "image Images".
+const ICON_SELECTOR = [
+  "mat-icon",
+  "i",
+  '[class*="material-icons"]',
+  '[class*="material-symbols"]',
+  '[class*="google-symbols"]',
+  '[class*="icon"][aria-hidden="true"]',
+  '[data-icon]'
+].join(", ");
+
+function textWithoutIcons(el) {
+  let text = "";
+  if (el.querySelector?.(ICON_SELECTOR)) {
+    const copy = el.cloneNode(true);
+    copy.querySelectorAll(ICON_SELECTOR).forEach((node) => node.remove());
+    text = norm(copy.textContent || "");
+  }
+  if (!text) text = norm(el.innerText || el.textContent || "");
+  // Fallback when the icon is not marked up: a lower-case ligature word in
+  // front of a capitalised label ("image Images", "videocam Video").
+  const lead = text.match(/^[a-z][a-z0-9_]*\s+(?=[A-Z0-9])/);
+  if (lead && text.length > lead[0].length) text = text.slice(lead[0].length);
+  return text;
 }
 
 function findClickable(root, patterns) {
@@ -296,7 +323,7 @@ function buttonSample() {
 function healthcheck() {
   const prompt = findPrompt();
   const generate = findClickable(document, [/^generate$/i, /^create$/i, /send prompt/i]);
-  const chip = findClickable(composerRoot(), [/nano banana/i, /veo\s*3/i, /omni/i, /^image$/i, /^video$/i, /settings/i]);
+  const chip = findClickable(composerRoot(), [/nano banana/i, /veo\s*3/i, /omni/i, /^images?$/i, /^videos?$/i, /settings/i]);
   const file = queryAllDeep('input[type="file"]')[0] || findClickable(document, [/^add$/i, /^upload$/i]);
   const entry = (key, el, strategy) => ({
     key,
@@ -336,7 +363,7 @@ function modeHint() {
   if (/video frames|frames to video|add start frame|add end frame/.test(text)) return "frames";
   if (/ingredient/.test(text)) return "ingredients";
   if (/nano banana/.test(text) && !/veo|omni/.test(text)) return "image";
-  if (/\bvideo\b/.test(text) && /veo|omni/.test(text)) return "video";
+  if (/\bvideos?\b/.test(text) && /veo|omni/.test(text)) return "video";
   return "";
 }
 
@@ -345,8 +372,8 @@ async function openMenu(signal) {
     /nano banana/i,
     /veo\s*3/i,
     /omni/i,
-    /^image$/i,
-    /^video$/i,
+    /^images?$/i,
+    /^videos?$/i,
     /settings/i,
     /^tune$/i,
     /^model$/i
@@ -391,12 +418,12 @@ async function choose(patterns, signal) {
 }
 
 const MODE_CHOICE = {
-  "flow-text-to-image": { hint: "image", choices: [/^image$/i] },
-  "flow-image-to-image": { hint: "image", choices: [/^image$/i] },
-  "flow-text-to-video": { hint: "video", choices: [/^video$/i, /^text to video$/i] },
-  "flow-frame-to-video": { hint: "frames", choices: [/video frames/i, /^frames$/i, /frames to video/i] },
-  "flow-ingredients-to-video": { hint: "ingredients", choices: [/video ingredients/i, /^ingredients$/i] },
-  "flow-video-to-video": { hint: "ingredients", choices: [/video ingredients/i, /^ingredients$/i, /edit video/i] }
+  "flow-text-to-image": { hint: "image", choices: [/^images?$/i] },
+  "flow-image-to-image": { hint: "image", choices: [/^images?$/i] },
+  "flow-text-to-video": { hint: "video", choices: [/^videos?$/i, /^text to video$/i] },
+  "flow-frame-to-video": { hint: "frames", choices: [/video frames/i, /^(video )?frames$/i, /frames to video/i] },
+  "flow-ingredients-to-video": { hint: "ingredients", choices: [/video ingredients/i, /^(video )?ingredients$/i] },
+  "flow-video-to-video": { hint: "ingredients", choices: [/video ingredients/i, /^(video )?ingredients$/i, /edit video/i] }
 };
 
 const MODEL_CHOICE = {

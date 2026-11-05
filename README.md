@@ -23,6 +23,8 @@ Full terms: [LICENSE](LICENSE).
 > 4. Click **Load unpacked** and choose the `extension/` folder.
 > 5. Open <https://flow.google.com> and keep that tab visible.
 > 6. Start the CLI so the bridge listens on `127.0.0.1:8791`.
+>
+> It is not on the Chrome Web Store, and Chrome's **Update** button does not update it. To update: `git pull` (or download the repo again), click **Reload** on *MaxOut AI Flow Connector* in `chrome://extensions`, then reload the flow.google.com tab.
 
 flowai-automation (Flow Connector): the CLI talks to a local bridge, and the Chrome extension drives <https://flow.google.com>.
 

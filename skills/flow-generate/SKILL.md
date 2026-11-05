@@ -54,6 +54,27 @@ Joining a film, a music bed, narration, captions, and taking the last frame for 
 
 The `status` output reports tab visibility live (the extension updates it the instant the window is minimised or covered), so you can catch a stall *before* wasting a generation. With `--json`, the field is `grokVisible` (reused field name — same meaning for both sites): `true` / `false` / `null` = unknown.
 
+## The extension — ours, never the Chrome Web Store
+
+The extension this skill drives is **MaxOut AI Flow Connector**. It is not on the
+Chrome Web Store. Do NOT send the user to a Web Store listing called "Flow
+Connector" (or any other store page), and do NOT tell them to press Chrome's
+**Update** button: an unpacked extension is never updated that way.
+
+It ships from the MaxOut AI GitHub repo, in the `extension/` folder of
+https://github.com/maxoutaiofficial/flowai-automation.
+
+- **Install:** download or `git clone` the repo, open `chrome://extensions`,
+  turn on Developer mode, click **Load unpacked**, and choose `extension/`.
+- **Update** (an error says the extension is outdated, Flow's buttons are not
+  found, or the version is lower than the bridge wants): in the repo folder run
+  `git pull` (or download the repo again), then click **Reload** on
+  *MaxOut AI Flow Connector* in `chrome://extensions`, then reload the
+  flow.google.com tab. `flow-auto reload-extension --site flow` also reloads it
+  once the new files are on disk.
+- **Only one copy may connect.** If `doctor` reports two browsers or profiles,
+  tell the user to turn the extension off in the other one.
+
 ## Browser requirement — state this clearly, don't assume it
 
 This is **UI/browser automation, not an API and not a bot** — it drives the real Flow interface with real clicks, typing, and uploads, exactly like a person would, which is also *why* it can't run headless or in a background tab. It needs a `flow.google.com` tab that is:
@@ -667,7 +688,7 @@ flow-auto merge "clip1.mp4" "clip2.mp4" "clip3.mp4" -o "montage.mp4"
 
 ## Errors
 
-- `extension (flow) NOT CONNECTED` → ask the user to open Edge (or Chrome) with the Flow Connector extension and a visible flow.google.com tab.
+- `extension (flow) NOT CONNECTED` → ask the user to open Edge (or Chrome) with the MaxOut AI Flow Connector extension (loaded unpacked from the repo's `extension/` folder, not the Web Store) and a visible flow.google.com tab.
 - `Flow is open but the page never became ready` → **the extension already
   reloaded that tab twice before saying this**, so asking the user to press F5
   repeats what has already failed. The usual cause is a tab Chrome discarded
